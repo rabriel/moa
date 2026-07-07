@@ -132,7 +132,7 @@ a {
 
 .btn-primary-game {
     width: 100%;
-    min-height: 74px;
+    min-height: 50px;
     border: 0;
     border-radius: 20px;
     background: var(--brand-yellow);
@@ -181,7 +181,7 @@ a {
 
 .form-control-game {
     width: 100%;
-    min-height: 78px;
+    min-height: 50px;
     padding: 18px 22px;
     border: 0;
     border-radius: 20px;
