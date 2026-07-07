@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -10,7 +11,7 @@ class AdminAuthController extends Controller
 {
     public function create(Request $request): View|RedirectResponse
     {
-        if ($request->session()->get('admin_authenticated')) {
+        if ($request->session()->get('admin_id')) {
             return redirect()->route('admin.entries.index');
         }
 
@@ -24,11 +25,13 @@ class AdminAuthController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        $adminEmail = (string) config('admin.email');
-        $adminPasswordHash = (string) config('admin.password_hash');
+        $admin = Admin::query()
+            ->where('email', $credentials['email'])
+            ->where('is_active', true)
+            ->first();
 
-        $isValid = strcasecmp($credentials['email'], $adminEmail) === 0
-            && $this->passwordMatches($credentials['password'], $adminPasswordHash);
+        $isValid = $admin !== null
+            && $this->passwordMatches($credentials['password'], $admin->password);
 
         if (! $isValid) {
             return back()
@@ -37,8 +40,8 @@ class AdminAuthController extends Controller
         }
 
         $request->session()->regenerate();
-        $request->session()->put('admin_authenticated', true);
-        $request->session()->put('admin_email', $adminEmail);
+        $request->session()->put('admin_id', $admin->id);
+        $request->session()->put('admin_email', $admin->email);
 
         return redirect()->route('admin.entries.index');
     }
@@ -46,7 +49,7 @@ class AdminAuthController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         $request->session()->forget([
-            'admin_authenticated',
+            'admin_id',
             'admin_email',
         ]);
 
