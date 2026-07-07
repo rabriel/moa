@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class AdminAuthController extends Controller
@@ -29,7 +28,7 @@ class AdminAuthController extends Controller
         $adminPasswordHash = (string) config('admin.password_hash');
 
         $isValid = strcasecmp($credentials['email'], $adminEmail) === 0
-            && Hash::check($credentials['password'], $adminPasswordHash);
+            && $this->passwordMatches($credentials['password'], $adminPasswordHash);
 
         if (! $isValid) {
             return back()
@@ -55,5 +54,14 @@ class AdminAuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('admin.login');
+    }
+
+    protected function passwordMatches(string $plainPassword, string $storedHash): bool
+    {
+        if ($storedHash === '') {
+            return false;
+        }
+
+        return password_verify($plainPassword, $storedHash);
     }
 }
