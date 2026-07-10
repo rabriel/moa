@@ -23,7 +23,7 @@
                     class="form-control-game @error('name') is-invalid @enderror"
                     type="text"
                     value="{{ old('name') }}"
-                    placeholder="Enter your name"
+                    placeholder="your name"
                     required
                 >
                 @error('name')
@@ -39,7 +39,7 @@
                     class="form-control-game @error('surname') is-invalid @enderror"
                     type="text"
                     value="{{ old('surname') }}"
-                    placeholder="Enter your surname"
+                    placeholder="your surname"
                     required
                 >
                 @error('surname')
@@ -55,7 +55,7 @@
                     class="form-control-game @error('email') is-invalid @enderror"
                     type="email"
                     value="{{ old('email') }}"
-                    placeholder="Enter your email"
+                    placeholder="your email"
                     required
                 >
                 @error('email')
@@ -71,7 +71,7 @@
                     class="form-control-game @error('cell_phone') is-invalid @enderror"
                     type="tel"
                     value="{{ old('cell_phone') }}"
-                    placeholder="Enter your cellphone"
+                    placeholder="your cell number"
                     required
                 >
                 @error('cell_phone')
@@ -82,6 +82,7 @@
             <x-primary-button type="submit" class="button-wrap">I'M READY!</x-primary-button>
         </form>
 
-        <p class="fine-print text-center">Participation is free. Limited to one entry per person. Competition ends Fri 31 July. T's &amp; C's apply.</p>
+        <p class="fine-print text-center">Free to enter. One entry per person.</p>
+        <p class="terms-link-wrap"><a href="#" class="terms-link">Terms &amp; Conditions</a></p>
     </section>
 @endsection

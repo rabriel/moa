@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @php
         $shareTitle = trim($__env->yieldContent('title', 'Mall of the North QR Hunt'));
-        $shareDescription = trim($__env->yieldContent('meta_description', 'Henry & James need your help! Hunt down all the store clues hidden around Mall of the North.'));
+        $shareDescription = trim($__env->yieldContent('meta_description', 'Find all 20 hidden bananas in participating store windows for a chance to win a Mall of the North gift card.'));
         $shareUrl = url()->current();
         $shareImage = asset('og-image.png');
     @endphp

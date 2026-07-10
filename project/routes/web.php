@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/register', [RegistrationController::class, 'index'])->name('register.index');
 Route::post('/register', [RegistrationController::class, 'store'])->name('register.store');
+Route::view('/terms-and-conditions', 'terms.index')->name('terms.index');
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'create'])->name('login');

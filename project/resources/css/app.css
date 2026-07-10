@@ -92,7 +92,8 @@ a {
 }
 
 .screen-card--register,
-.screen-card--game {
+.screen-card--game,
+.screen-card--terms {
     padding-bottom: 28px;
 }
 
@@ -114,7 +115,7 @@ a {
 }
 
 .hero-copy {
-    margin: 18px 10px 44px;
+    margin: 18px 10px 30px;
     color: #fff;
     font-size: 1.85rem;
     font-weight: 900;
@@ -122,22 +123,64 @@ a {
     text-align: center;
 }
 
+.hero-copy--landing {
+    margin-top: 16px;
+    margin-bottom: 18px;
+}
+
+.hero-copy__line {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(2rem, 7vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.05;
+}
+
+.hero-copy__line + .hero-copy__line {
+    margin-top: 4px;
+}
+
+.hero-copy__line--highlight {
+    color: var(--brand-yellow);
+}
+
+.hero-subcopy {
+    margin: 0 10px 30px;
+    text-align: center;
+}
+
+.hero-subcopy p {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.2rem, 4.6vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.hero-subcopy p + p {
+    margin-top: 4px;
+}
+
+.hero-subcopy__highlight {
+    color: var(--brand-yellow);
+}
+
 .game-header__subtitle {
     display: none;
 }
 
 .entry-form {
-    margin-top: 22px;
+    margin-top: 12px;
 }
 
 .btn-primary-game {
     width: 100%;
-    min-height: 50px;
+    min-height: 56px;
     border: 0;
     border-radius: 20px;
     background: var(--brand-yellow);
     color: #000;
-    font-size: clamp(1.75rem, 7vw, 2.6rem);
+    font-size: clamp(1.2rem, 5.3vw, 1.7rem);
     font-family: 'Gotham', Arial, sans-serif;
     font-weight: 700;
     line-height: 1;
@@ -149,6 +192,7 @@ a {
     align-items: center;
     justify-content: center;
     padding: 16px 22px;
+    white-space: nowrap;
 }
 
 .btn-primary-game:hover,
@@ -160,11 +204,11 @@ a {
 
 .btn-primary-game--small {
     min-height: 66px;
-    font-size: clamp(1.45rem, 6vw, 2.1rem);
+    font-size: clamp(1.2rem, 5.2vw, 1.65rem);
 }
 
 .button-wrap {
-    margin-top: 18px;
+    margin-top: 24px;
 }
 
 .button-wrap--hero {
@@ -173,21 +217,21 @@ a {
 
 .form-label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     color: #fff;
-    font-size: 1.15rem;
+    font-size: 0.95rem;
     font-weight: 400;
 }
 
 .form-control-game {
     width: 100%;
-    min-height: 50px;
-    padding: 18px 22px;
+    min-height: 40px;
+    padding: 14px 18px;
     border: 0;
-    border-radius: 20px;
+    border-radius: 14px;
     background: #fff;
     color: #111;
-    font-size: 1.05rem;
+    font-size: 1rem;
     outline: none;
 }
 
@@ -207,16 +251,16 @@ a {
 }
 
 .progress-tracker {
-    margin-top: 18px;
+    margin-top: 14px;
 }
 
 .progress-meta {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     color: #fff;
-    font-size: 1.15rem;
+    font-size: 1rem;
     font-weight: 700;
     text-align: center;
 }
@@ -229,37 +273,37 @@ a {
 .progress-slots {
     display: flex;
     justify-content: space-between;
-    gap: 5px;
+    gap: 4px;
     width: 100%;
 }
 
 .progress-slot {
-    width: 12px;
-    height: 45px;
-    flex: 0 0 12px;
+    width: 14px;
+    height: 42px;
+    flex: 0 0 14px;
     display: block;
 }
 
 .clue-card {
     width: 100%;
-    margin-top: 8px;
-    padding: 20px;
-    border-radius: 24px;
+    margin-top: 2px;
+    padding: 14px 16px 16px;
+    border-radius: 14px;
     background: #fff;
     color: #111;
 }
 
 .clue-card-title {
-    margin: 0 0 14px;
+    margin: 0 0 10px;
     color: #0e4774;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 700;
 }
 
 .clue-card-text {
     margin: 0;
-    font-size: 1rem;
-    line-height: 1.35;
+    font-size: 0.95rem;
+    line-height: 1.18;
     font-weight: 400;
 }
 
@@ -267,8 +311,9 @@ a {
     padding: 0;
     border-radius: 0;
     font-weight: 700;
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     line-height: 1.25;
+    text-align: center;
 }
 
 .status-message--success {
@@ -283,6 +328,13 @@ a {
     color: var(--brand-yellow);
 }
 
+.status-message--hero {
+    margin-top: 8px;
+    font-size: clamp(2.15rem, 8vw, 3rem);
+    font-weight: 700;
+    line-height: 1.12;
+}
+
 .instruction-copy,
 .fine-print {
     margin: 0;
@@ -291,29 +343,80 @@ a {
 }
 
 .instruction-copy {
-    margin-top: 18px;
+    margin-top: 16px;
     color: #fff;
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     font-weight: 700;
 }
 
 .fine-print {
     color: rgba(255, 255, 255, 0.46);
-    font-size: 0.95rem;
+    font-size: 0.82rem;
     line-height: 1.35;
 }
 
 .fine-print--landing {
-    margin-top: -4px;
+    margin-top: 0;
+}
+
+.legal-copy {
+    margin-top: 12px;
+}
+
+.legal-inline-link,
+.terms-link {
+    color: var(--brand-yellow);
+    text-decoration: none;
+}
+
+.terms-link-wrap {
+    margin: 8px 0 0;
+    text-align: center;
+}
+
+.terms-link {
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.terms-card {
+    margin-top: 10px;
+    padding: 22px 18px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #143047;
+}
+
+.terms-card__title {
+    margin: 0 0 14px;
+    color: #0e4774;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.terms-card__intro {
+    margin: 0 0 14px;
+    font-size: 0.98rem;
+    line-height: 1.45;
+}
+
+.terms-card__body p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+.terms-card__body p + p {
+    margin-top: 12px;
 }
 
 .footer-brand {
-    padding: 0 20px 10px;
+    padding: 8px 20px 10px;
     text-align: center;
 }
 
 .footer-brand__image {
-    width: min(100%, 170px);
+    width: min(100%, 165px);
     height: auto;
 }
 
@@ -331,6 +434,18 @@ a {
     .hero-copy {
         font-size: 1.6rem;
         margin-top: 18px;
+    }
+
+    .hero-copy__line {
+        font-size: 1.8rem;
+    }
+
+    .hero-subcopy p {
+        font-size: 1.08rem;
+    }
+
+    .status-message--hero {
+        font-size: 1.9rem;
     }
 }
 

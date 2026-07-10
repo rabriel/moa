@@ -27,6 +27,7 @@
             Scan Now
         </x-primary-button>
 
-        <p class="fine-print text-center">Keep the hunt going! Scan the next banana QR code for your next clue.</p>
+        <p class="fine-print text-center">Scan the next Minion QR code you find to reveal your next clue.</p>
+        <p class="terms-link-wrap"><a href="#" class="terms-link">Terms &amp; Conditions</a></p>
     </section>
 @endsection
