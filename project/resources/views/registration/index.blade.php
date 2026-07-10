@@ -64,14 +64,14 @@
             </div>
 
             <div class="mb-5">
-                <label class="form-label" for="cell_phone">Cell Phone</label>
+                <label class="form-label" for="cell_phone">Cellphone</label>
                 <input
                     id="cell_phone"
                     name="cell_phone"
                     class="form-control-game @error('cell_phone') is-invalid @enderror"
                     type="tel"
                     value="{{ old('cell_phone') }}"
-                    placeholder="Enter your cell phone"
+                    placeholder="Enter your cellphone"
                     required
                 >
                 @error('cell_phone')
@@ -79,9 +79,9 @@
                 @enderror
             </div>
 
-            <x-primary-button type="submit" class="button-wrap">Submit</x-primary-button>
+            <x-primary-button type="submit" class="button-wrap">I'M READY!</x-primary-button>
         </form>
 
-        <p class="fine-print text-center">Free to enter. One entry per person.</p>
+        <p class="fine-print text-center">Participation is free. Limited to one entry per person. Competition ends Fri 31 July. T's &amp; C's apply.</p>
     </section>
 @endsection

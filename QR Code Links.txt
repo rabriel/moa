@@ -1,10 +1,10 @@
-/{BASE_URL}/scan/ackermans
-/{BASE_URL}/scan/lacoste
-/{BASE_URL}/scan/spec-savers
-/{BASE_URL}/scan/baby-city
-/{BASE_URL}/scan/the-fun-company
-/{BASE_URL}/scan/expedition-north
-/{BASE_URL}/scan/coricraft
+/{BASE_URL}/scan/ackermans - Done
+/{BASE_URL}/scan/lacoste - Done
+/{BASE_URL}/scan/spec-savers - Done
+/{BASE_URL}/scan/baby-city - Done
+/{BASE_URL}/scan/the-fun-company - Done
+/{BASE_URL}/scan/expedition-north - Done
+/{BASE_URL}/scan/coricraft - Done
 /{BASE_URL}/scan/legends-barbershop
 /{BASE_URL}/scan/clicks
 /{BASE_URL}/scan/lovisa

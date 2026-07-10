@@ -38,6 +38,6 @@ class RegistrationController extends Controller
 
         return redirect()
             ->route('game.index')
-            ->with('status', 'Registration complete. Start hunting for Minions!');
+            ->with('status', "You're In! Let the Banana Hunt Begin!");
     }
 }

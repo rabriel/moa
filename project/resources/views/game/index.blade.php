@@ -14,12 +14,12 @@
 
         <x-progress-tracker :found="$progressFound" :total="$progressTotal" />
 
-        <p class="instruction-copy">Scan a Minion QR code at any store to reveal your next clue.</p>
+        <p class="instruction-copy">Found a banana? Scan the QR code to reveal your next destination!</p>
 
         <x-primary-button :href="route('scan.show', ['store' => 'ackermans'])" class="button-wrap">
             Scan Now
         </x-primary-button>
 
-        <p class="fine-print text-center">Scan the next Minion QR code you find to reveal your next clue.</p>
+        <p class="fine-print text-center">Keep the hunt going! Scan the next banana QR code for your next clue.</p>
     </section>
 @endsection

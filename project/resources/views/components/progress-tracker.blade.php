@@ -9,7 +9,7 @@
 
 <section class="progress-tracker">
     <div class="progress-meta {{ $found === 0 ? 'progress-meta--stacked' : '' }}">
-        <span>Minions found: {{ $found }}/{{ $total }}</span>
+        <span>Bananas found: {{ $found }}/{{ $total }}</span>
         @if ($found === 0)
             <span>{{ $remaining }} to go!</span>
         @else

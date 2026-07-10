@@ -11,6 +11,29 @@ use Illuminate\View\View;
 
 class QRCodeController extends Controller
 {
+    protected const STORE_SUCCESS_MESSAGES = [
+        'ackermans' => 'Bee-do! You did it!',
+        'lacoste' => 'Ba-na-na! Nice work!',
+        'spec-savers' => 'Bello! You found one!',
+        'baby-city' => 'Banana power! Keep going!',
+        'the-fun-company' => "You're one clever Minion!",
+        'expedition-north' => 'Woohoo! Another banana found!',
+        'coricraft' => 'Great job, Banana Hunter!',
+        'legends-barbershop' => "You're on a banana roll!",
+        'clicks' => 'Bello, superstar!',
+        'lovisa' => 'Minion approved!',
+        'destinations-by-frasers' => 'Ooh la la! Another one found!',
+        'freedom-of-movement' => 'Banana-tastic!',
+        'sorbet' => 'Keep calm and go bananas!',
+        'old-school' => 'Despicably good hunting!',
+        'le-creuset' => 'So far, so banana!',
+        'pna' => "You're crushing this hunt!",
+        'crocs' => 'Banana brilliance!',
+        'cell-c' => "You've got Minion magic!",
+        'totalsports' => 'Another banana bites the dust!',
+        'spur' => 'Bee-do! You did it!',
+    ];
+
     public function show(Request $request, Store $store): View|RedirectResponse
     {
         $player = Player::query()->findOrFail($request->session()->get('player_id'));
@@ -45,6 +68,7 @@ class QRCodeController extends Controller
             'progressFound' => $progressFound,
             'store' => $store,
             'isDuplicateVisit' => $isDuplicateVisit,
+            'successMessage' => self::STORE_SUCCESS_MESSAGES[$store->slug] ?? 'Bee-do! You did it!',
         ]);
     }
 }

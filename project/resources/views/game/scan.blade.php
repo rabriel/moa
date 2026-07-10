@@ -14,7 +14,7 @@
             </x-error-message>
         @else
             <x-success-message>
-                Nice find! On to the next Minion.
+                {{ $successMessage }}
             </x-success-message>
         @endif
 
@@ -27,6 +27,6 @@
             Scan Now
         </x-primary-button>
 
-        <p class="fine-print text-center">Scan the next Minion QR code you find to reveal your next clue.</p>
+        <p class="fine-print text-center">Keep the hunt going! Scan the next banana QR code for your next clue.</p>
     </section>
 @endsection
