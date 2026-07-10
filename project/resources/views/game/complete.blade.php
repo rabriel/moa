@@ -12,7 +12,7 @@
             Bello, {{ $player->name }}! You did it! All 20 bananas found. Fingers crossed you're our lucky winner!
         </x-success-message>
 
-        <x-primary-button :href="route('game.index')" class="button-wrap">
+        <x-primary-button type="button" class="button-wrap">
             Scan Now
         </x-primary-button>
 

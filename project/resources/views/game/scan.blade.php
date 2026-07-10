@@ -23,7 +23,7 @@
             :text="$store->clue"
         />
 
-        <x-primary-button :href="route('game.index')" class="button-wrap">
+        <x-primary-button type="button" class="button-wrap">
             Scan Now
         </x-primary-button>
 

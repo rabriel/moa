@@ -16,7 +16,7 @@
 
         <p class="instruction-copy">Found a banana? Scan the QR code to reveal your next destination!</p>
 
-        <x-primary-button :href="route('scan.show', ['store' => 'ackermans'])" class="button-wrap">
+        <x-primary-button type="button" class="button-wrap">
             Scan Now
         </x-primary-button>
 
