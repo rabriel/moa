@@ -29,3 +29,5 @@ Route::middleware('ensure.player.registered')->group(function () {
     Route::get('/scan/{store:slug}', [QRCodeController::class, 'show'])->name('scan.show');
     Route::get('/complete', [GameController::class, 'complete'])->name('game.complete');
 });
+
+//URL::forceScheme('https');
