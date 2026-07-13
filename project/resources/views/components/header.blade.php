@@ -6,7 +6,7 @@
 
 <header class="game-header">
     @if ($showLogo)
-        <img src="{{ asset('images/header-background.png') }}" alt="Meet Henry and James" class="game-header__hero">
+        <img src="{{ asset('images/header-background-new.png') }}" alt="Meet Henry and James" class="game-header__hero">
     @endif
 
     @if ($title !== '')
