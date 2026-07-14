@@ -37,7 +37,7 @@ class RegistrationController extends Controller
         $request->session()->put('player_id', $player->id);
 
         return redirect()
-            ->route('game.index')
+            ->route('scan.show', ['store' => 'ackermans'])
             ->with('status', "You're In! Let the Banana Hunt Begin!");
     }
 }
