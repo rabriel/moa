@@ -23,7 +23,7 @@
             :text="$store->clue"
         />
 
-        <x-primary-button type="button" class="button-wrap">
+        <x-primary-button type="button" class="button-wrap" data-open-scanner>
             Scan Now
         </x-primary-button>
 

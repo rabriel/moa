@@ -37,5 +37,23 @@
             </div>
         </main>
     </div>
+
+    <div class="scanner-modal" id="scannerModal" hidden aria-hidden="true">
+        <div class="scanner-modal__backdrop" data-close-scanner></div>
+        <div class="scanner-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="scannerTitle">
+            <button type="button" class="scanner-modal__close" data-close-scanner aria-label="Close scanner">Close</button>
+            <h2 class="scanner-modal__title" id="scannerTitle">Scan QR Code</h2>
+            <p class="scanner-modal__copy">Point your camera at a store QR code to reveal the next clue.</p>
+
+            <div class="scanner-modal__viewport">
+                <video id="scannerVideo" class="scanner-modal__video" playsinline muted></video>
+                <div class="scanner-modal__frame" aria-hidden="true"></div>
+            </div>
+
+            <p class="scanner-modal__status" id="scannerStatus" role="status" aria-live="polite">
+                Allow camera access to start scanning.
+            </p>
+        </div>
+    </div>
 </body>
 </html>
