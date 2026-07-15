@@ -1,6 +1,7 @@
 import './bootstrap';
 import 'bootstrap';
 import $ from 'jquery';
+import { Html5Qrcode } from 'html5-qrcode';
 
 window.$ = $;
 window.jQuery = $;
@@ -9,55 +10,53 @@ $(function () {
     document.documentElement.classList.add('app-is-ready');
 
     const scannerModal = document.getElementById('scannerModal');
-    const scannerVideo = document.getElementById('scannerVideo');
+    const scannerReader = document.getElementById('scannerReader');
     const scannerStatus = document.getElementById('scannerStatus');
 
-    if (!scannerModal || !scannerVideo || !scannerStatus) {
+    if (!scannerModal || !scannerReader || !scannerStatus) {
         return;
     }
 
-    let scannerStream = null;
-    let scannerDetector = null;
-    let scannerFrameId = null;
+    let html5QrCode = null;
     let scannerIsActive = false;
 
     const setScannerStatus = (message) => {
         scannerStatus.textContent = message;
     };
 
-    const stopScanner = () => {
+    const stopScanner = async () => {
         scannerIsActive = false;
 
-        if (scannerFrameId) {
-            window.cancelAnimationFrame(scannerFrameId);
-            scannerFrameId = null;
-        }
+        if (html5QrCode) {
+            try {
+                if (html5QrCode.isScanning) {
+                    await html5QrCode.stop();
+                }
+            } catch (error) {
+                // If stop fails, continue cleanup so the user is not trapped in the modal.
+            }
 
-        if (scannerStream) {
-            scannerStream.getTracks().forEach((track) => track.stop());
-            scannerStream = null;
+            try {
+                await html5QrCode.clear();
+            } catch (error) {
+                // Ignore clear failures during teardown.
+            }
         }
-
-        scannerVideo.pause();
-        scannerVideo.srcObject = null;
     };
 
-    const closeScanner = () => {
-        stopScanner();
+    const closeScanner = async () => {
+        await stopScanner();
         scannerModal.hidden = true;
         scannerModal.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('scanner-is-open');
         setScannerStatus('Allow camera access to start scanning.');
     };
 
-    const redirectToScan = (rawValue) => {
+    const redirectToScan = async (rawValue) => {
         if (!rawValue) {
             setScannerStatus('That QR code could not be read. Try again.');
             return;
         }
-
-        stopScanner();
-        setScannerStatus('QR code found. Opening clue...');
 
         try {
             const resolvedUrl = new URL(rawValue, window.location.origin);
@@ -67,32 +66,11 @@ $(function () {
                 return;
             }
 
+            await closeScanner();
             window.location.assign(resolvedUrl.toString());
         } catch (error) {
             setScannerStatus('That QR code link is invalid. Try another code.');
         }
-    };
-
-    const scanLoop = async () => {
-        if (!scannerIsActive || !scannerDetector) {
-            return;
-        }
-
-        if (scannerVideo.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA) {
-            try {
-                const barcodes = await scannerDetector.detect(scannerVideo);
-                const qrCode = barcodes.find((barcode) => barcode.rawValue);
-
-                if (qrCode) {
-                    redirectToScan(qrCode.rawValue);
-                    return;
-                }
-            } catch (error) {
-                setScannerStatus('We could not read the QR code. Try moving closer and holding steady.');
-            }
-        }
-
-        scannerFrameId = window.requestAnimationFrame(scanLoop);
     };
 
     const openScanner = async () => {
@@ -110,31 +88,32 @@ $(function () {
             return;
         }
 
-        if (!('BarcodeDetector' in window)) {
-            setScannerStatus('This browser can open the camera, but it does not support in-page QR detection. Please use your phone camera app to scan the QR code.');
-            return;
+        if (!html5QrCode) {
+            html5QrCode = new Html5Qrcode('scannerReader');
         }
 
         try {
-            scannerDetector = new window.BarcodeDetector({ formats: ['qr_code'] });
-        } catch (error) {
-            setScannerStatus('QR scanning is not available on this browser. Please use your phone camera app to scan the QR code.');
-            return;
-        }
-
-        try {
-            scannerStream = await navigator.mediaDevices.getUserMedia({
-                video: {
-                    facingMode: { ideal: 'environment' },
-                },
-                audio: false,
-            });
-
-            scannerVideo.srcObject = scannerStream;
-            await scannerVideo.play();
             scannerIsActive = true;
             setScannerStatus('Scanning for a store QR code...');
-            scannerFrameId = window.requestAnimationFrame(scanLoop);
+
+            await html5QrCode.start(
+                { facingMode: 'environment' },
+                {
+                    fps: 10,
+                    qrbox: { width: 220, height: 220 },
+                    aspectRatio: 1,
+                },
+                (decodedText) => {
+                    if (scannerIsActive) {
+                        redirectToScan(decodedText);
+                    }
+                },
+                () => {
+                    if (scannerIsActive) {
+                        setScannerStatus('Scanning for a store QR code...');
+                    }
+                }
+            );
         } catch (error) {
             setScannerStatus('Camera access was denied or is unavailable. Please allow camera access and try again.');
         }

@@ -46,7 +46,7 @@
             <p class="scanner-modal__copy">Point your camera at a store QR code to reveal the next clue.</p>
 
             <div class="scanner-modal__viewport">
-                <video id="scannerVideo" class="scanner-modal__video" playsinline muted></video>
+                <div id="scannerReader" class="scanner-modal__reader"></div>
                 <div class="scanner-modal__frame" aria-hidden="true"></div>
             </div>
 

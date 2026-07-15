@@ -763,10 +763,14 @@ a {
     background: rgba(0, 0, 0, 0.3);
 }
 
-.scanner-modal__video {
+.scanner-modal__reader {
     width: 100%;
     height: 100%;
-    display: block;
+}
+
+.scanner-modal__reader video {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
