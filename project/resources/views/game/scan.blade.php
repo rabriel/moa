@@ -12,7 +12,7 @@
             <x-error-message>
                 You've already logged this store - here's the clue again.
             </x-error-message>
-        @else
+        @elseif (($showSuccessMessage ?? true) && filled($successMessage ?? null))
             <x-success-message>
                 {{ $successMessage }}
             </x-success-message>

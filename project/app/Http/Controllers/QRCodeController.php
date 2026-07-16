@@ -42,6 +42,22 @@ class QRCodeController extends Controller
             'player_id' => $player->id,
             'store_id' => $store->id,
         ]);
+        $isIntroAckermans = $store->slug === 'ackermans'
+            && $request->boolean('intro')
+            && ! $visit->exists
+            && $player->visits()->count() === 0;
+
+        if ($isIntroAckermans) {
+            return view('game.scan', [
+                'player' => $player,
+                'progressTotal' => $progressTotal,
+                'progressFound' => 0,
+                'store' => $store,
+                'isDuplicateVisit' => false,
+                'showSuccessMessage' => false,
+                'successMessage' => null,
+            ]);
+        }
 
         $isDuplicateVisit = $visit->exists;
 
@@ -68,6 +84,7 @@ class QRCodeController extends Controller
             'progressFound' => $progressFound,
             'store' => $store,
             'isDuplicateVisit' => $isDuplicateVisit,
+            'showSuccessMessage' => ! $isDuplicateVisit,
             'successMessage' => self::STORE_SUCCESS_MESSAGES[$store->slug] ?? 'Bee-do! You did it!',
         ]);
     }
