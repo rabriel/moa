@@ -4,11 +4,18 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminEntryController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PlayerAuthController;
+use App\Http\Controllers\PlayerPasswordController;
 use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/login', [PlayerAuthController::class, 'create'])->name('login');
+Route::post('/login', [PlayerAuthController::class, 'store'])->name('login.store');
+Route::post('/logout', [PlayerAuthController::class, 'destroy'])->name('logout');
+Route::get('/forgot-password', [PlayerPasswordController::class, 'create'])->name('password.request');
+Route::post('/forgot-password', [PlayerPasswordController::class, 'store'])->name('password.store');
 Route::get('/register', [RegistrationController::class, 'index'])->name('register.index');
 Route::post('/register', [RegistrationController::class, 'store'])->name('register.store');
 Route::view('/terms-and-conditions', 'terms.index')->name('terms.index');

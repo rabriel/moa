@@ -16,8 +16,14 @@ class Player extends Model
         'surname',
         'email',
         'cell_phone',
+        'password',
         'session_token',
         'completed_at',
+    ];
+
+    protected $hidden = [
+        'password',
+        'session_token',
     ];
 
     protected $casts = [

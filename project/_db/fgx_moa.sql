@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jul 10, 2026 at 09:17 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Host: 127.0.0.1
+-- Generation Time: Jul 16, 2026 at 12:01 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `fgx_moa`
+-- Database: `moa`
 --
 
 -- --------------------------------------------------------
@@ -42,7 +42,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `password`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'Mall of the North Admin', 'mari@mallofthenorth.co.za', '$2y$10$kwHAXSvRMzqzqDvLGg2bBOhMgsM.CZl75XfJeMTZaIJ/2eL13Hhj2', 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55');
+(1, 'Mall of the North Admin', 'mari@mallofthenorth.co.za', '$2y$10$kwHAXSvRMzqzqDvLGg2bBOhMgsM.CZl75XfJeMTZaIJ/2eL13Hhj2', 1, '2026-07-16 08:01:23', '2026-07-16 08:01:23');
 
 -- --------------------------------------------------------
 
@@ -82,7 +82,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2026_07_07_130500_create_players_table', 1),
 (4, '2026_07_07_130600_create_stores_table', 1),
 (5, '2026_07_07_130700_create_player_store_visits_table', 1),
-(6, '2026_07_07_160000_create_admins_table', 1);
+(6, '2026_07_07_160000_create_admins_table', 1),
+(7, '2026_07_16_120000_add_password_to_players_table', 1);
 
 -- --------------------------------------------------------
 
@@ -115,6 +116,7 @@ CREATE TABLE `players` (
   `surname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `cell_phone` varchar(255) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `session_token` varchar(255) DEFAULT NULL,
   `completed_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -158,26 +160,26 @@ CREATE TABLE `stores` (
 --
 
 INSERT INTO `stores` (`id`, `name`, `slug`, `clue`, `sort_order`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'Ackermans', 'ackermans', 'Need a new outfit for your Minion mission? Look for the store where the whole family can dress for less.', 1, 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55'),
-(2, 'Lacoste', 'lacoste', 'A stylish Minion always dresses to impress! Find the store where classic fashion and the famous crocodile make a statement.', 2, 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55'),
-(3, 'Spec-Savers', 'spec-savers', 'A Minion misplaced his banana because he couldn\'t see! Visit the place that helps you spot every clue clearly.', 3, 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55'),
-(4, 'Baby City', 'baby-city', 'Little ones need lots of love and care. Find the store with baby essentials, outfits and treasures to share.', 4, 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55'),
-(5, 'The Fun Company', 'the-fun-company', 'Games, excitement and lots of laughs await! Find the place where fun is the main attraction.', 5, 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55'),
-(6, 'Expedition North', 'expedition-north', 'Every Minion explorer needs adventure gear! Find the store that\'s ready for mountains, trails and the great outdoors.', 6, 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55'),
-(7, 'Coricraft', 'coricraft', 'After a busy banana hunt, a Minion needs a comfy place to relax. Find the store where beautiful furniture makes a house a home.', 7, 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55'),
-(8, 'Legends Barbershop', 'legends-barbershop', 'Even Minions need a fresh haircut! Find the place where great styles become legendary.', 8, 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55'),
-(9, 'Clicks', 'clicks', 'Need toothpaste, shampoo or a quick health fix? Find the store that has a little bit of everything.', 9, 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55'),
-(10, 'Lovisa', 'lovisa', 'Sparkles catch a Minion\'s eye! Find the store filled with dazzling jewellery and accessories.', 10, 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55'),
-(11, 'Destinations by Frasers', 'destinations-by-frasers', 'A Minion adventure awaits! Find the store where suitcases, travel bags and journey essentials help explorers pack for their next mission.', 11, 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55'),
-(12, 'Freedom of Movement', 'freedom-of-movement', 'For this stop, find the place where style takes the lead. From leather treasures to branded looks, they have everything you need to move freely and confidently.', 12, 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55'),
-(13, 'Sorbet', 'sorbet', 'It\'s time to relax and glow! Find the place where beauty treatments and pampering help you shine from head to toe.', 13, 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55'),
-(14, 'Old School', 'old-school', 'A true supporter needs the right gear! Find the store where fans can show their colours and wear their team pride.', 14, 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55'),
-(15, 'Le Creuset', 'le-creuset', 'Even Minions need to cook up something delicious! Find the store where kitchen treasures and colourful cookware bring recipes to life.', 15, 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55'),
-(16, 'PNA', 'pna', 'Need something to write, create or learn? Find the place where stationery, gifts and school essentials take their turn!', 16, 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55'),
-(17, 'Crocs', 'crocs', 'Minions love to stand out! Find the store where colourful, comfy and funky footwear brings fun to every step.', 17, 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55'),
-(18, 'Cell C', 'cell-c', 'Minions love to stay connected! Find the store where you can call, chat and share your banana discoveries.', 18, 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55'),
-(19, 'Totalsports', 'totalsports', 'Ready, set, GO! Find the store where athletes and sports fans gear up for action.', 19, 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55'),
-(20, 'Spur', 'spur', 'Follow the smell of burgers and family fun! A hungry Minion knows exactly where to go.', 20, 1, '2026-07-10 05:16:55', '2026-07-10 05:16:55');
+(1, 'Ackermans', 'ackermans', 'Need a new outfit for your Minion mission? Look for the store where the whole family can dress for less.', 1, 1, '2026-07-16 08:01:23', '2026-07-16 08:01:23'),
+(2, 'Lacoste', 'lacoste', 'A stylish Minion always dresses to impress! Find the store where classic fashion and the famous crocodile make a statement.', 2, 1, '2026-07-16 08:01:23', '2026-07-16 08:01:23'),
+(3, 'Spec-Savers', 'spec-savers', 'A Minion misplaced his banana because he couldn\'t see! Visit the place that helps you spot every clue clearly.', 3, 1, '2026-07-16 08:01:23', '2026-07-16 08:01:23'),
+(4, 'Baby City', 'baby-city', 'Little ones need lots of love and care. Find the store with baby essentials, outfits and treasures to share.', 4, 1, '2026-07-16 08:01:23', '2026-07-16 08:01:23'),
+(5, 'The Fun Company', 'the-fun-company', 'Games, excitement and lots of laughs await! Find the place where fun is the main attraction.', 5, 1, '2026-07-16 08:01:23', '2026-07-16 08:01:23'),
+(6, 'Expedition North', 'expedition-north', 'Every Minion explorer needs adventure gear! Find the store that\'s ready for mountains, trails and the great outdoors.', 6, 1, '2026-07-16 08:01:23', '2026-07-16 08:01:23'),
+(7, 'Coricraft', 'coricraft', 'After a busy banana hunt, a Minion needs a comfy place to relax. Find the store where beautiful furniture makes a house a home.', 7, 1, '2026-07-16 08:01:23', '2026-07-16 08:01:23'),
+(8, 'Legends Barbershop', 'legends-barbershop', 'Even Minions need a fresh haircut! Find the place where great styles become legendary.', 8, 1, '2026-07-16 08:01:23', '2026-07-16 08:01:23'),
+(9, 'Clicks', 'clicks', 'Need toothpaste, shampoo or a quick health fix? Find the store that has a little bit of everything.', 9, 1, '2026-07-16 08:01:23', '2026-07-16 08:01:23'),
+(10, 'Lovisa', 'lovisa', 'Sparkles catch a Minion\'s eye! Find the store filled with dazzling jewellery and accessories.', 10, 1, '2026-07-16 08:01:24', '2026-07-16 08:01:24'),
+(11, 'Destinations by Frasers', 'destinations-by-frasers', 'A Minion adventure awaits! Find the store where suitcases, travel bags and journey essentials help explorers pack for their next mission.', 11, 1, '2026-07-16 08:01:24', '2026-07-16 08:01:24'),
+(12, 'Freedom of Movement', 'freedom-of-movement', 'For this stop, find the place where style takes the lead. From leather treasures to branded looks, they have everything you need to move freely and confidently.', 12, 1, '2026-07-16 08:01:24', '2026-07-16 08:01:24'),
+(13, 'Sorbet', 'sorbet', 'It\'s time to relax and glow! Find the place where beauty treatments and pampering help you shine from head to toe.', 13, 1, '2026-07-16 08:01:24', '2026-07-16 08:01:24'),
+(14, 'Old School', 'old-school', 'A true supporter needs the right gear! Find the store where fans can show their colours and wear their team pride.', 14, 1, '2026-07-16 08:01:24', '2026-07-16 08:01:24'),
+(15, 'Le Creuset', 'le-creuset', 'Even Minions need to cook up something delicious! Find the store where kitchen treasures and colourful cookware bring recipes to life.', 15, 1, '2026-07-16 08:01:24', '2026-07-16 08:01:24'),
+(16, 'PNA', 'pna', 'Need something to write, create or learn? Find the place where stationery, gifts and school essentials take their turn!', 16, 1, '2026-07-16 08:01:24', '2026-07-16 08:01:24'),
+(17, 'Crocs', 'crocs', 'Minions love to stand out! Find the store where colourful, comfy and funky footwear brings fun to every step.', 17, 1, '2026-07-16 08:01:24', '2026-07-16 08:01:24'),
+(18, 'Cell C', 'cell-c', 'Minions love to stay connected! Find the store where you can call, chat and share your banana discoveries.', 18, 1, '2026-07-16 08:01:24', '2026-07-16 08:01:24'),
+(19, 'Totalsports', 'totalsports', 'Ready, set, GO! Find the store where athletes and sports fans gear up for action.', 19, 1, '2026-07-16 08:01:24', '2026-07-16 08:01:24'),
+(20, 'Spur', 'spur', 'Follow the smell of burgers and family fun! A hungry Minion knows exactly where to go.', 20, 1, '2026-07-16 08:01:24', '2026-07-16 08:01:24');
 
 --
 -- Indexes for dumped tables
@@ -258,7 +260,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

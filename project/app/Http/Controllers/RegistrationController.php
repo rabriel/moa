@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Player;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class RegistrationController extends Controller
@@ -25,12 +26,14 @@ class RegistrationController extends Controller
             'surname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:players,email'],
             'cell_phone' => ['required', 'string', 'max:30', 'unique:players,cell_phone'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
         $request->session()->regenerate();
 
         $player = Player::create([
-            ...$validated,
+            ...collect($validated)->except('password', 'password_confirmation')->all(),
+            'password' => Hash::make($validated['password']),
             'session_token' => $request->session()->getId(),
         ]);
 

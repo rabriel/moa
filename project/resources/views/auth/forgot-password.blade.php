@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Register | Mall of the North QR Hunt')
+@section('title', 'Reset Password | Mall of the North QR Hunt')
 
 @section('content')
     <section class="screen-card screen-card--register">
@@ -8,44 +8,14 @@
 
         @if ($errors->any())
             <x-error-message>
-                Please fix the highlighted fields and try again.
+                Please check your details and try again.
             </x-error-message>
         @endif
 
-        <form class="entry-form" method="POST" action="{{ route('register.store') }}" novalidate>
+        <p class="fine-print text-center auth-intro-copy">Enter the email and cellphone used for your entry, then choose a new password.</p>
+
+        <form class="entry-form" method="POST" action="{{ route('password.store') }}" novalidate>
             @csrf
-
-            <div class="mb-4">
-                <label class="form-label" for="name">Name</label>
-                <input
-                    id="name"
-                    name="name"
-                    class="form-control-game @error('name') is-invalid @enderror"
-                    type="text"
-                    value="{{ old('name') }}"
-                    placeholder="your name"
-                    required
-                >
-                @error('name')
-                    <div class="field-error">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="mb-4">
-                <label class="form-label" for="surname">Surname</label>
-                <input
-                    id="surname"
-                    name="surname"
-                    class="form-control-game @error('surname') is-invalid @enderror"
-                    type="text"
-                    value="{{ old('surname') }}"
-                    placeholder="your surname"
-                    required
-                >
-                @error('surname')
-                    <div class="field-error">{{ $message }}</div>
-                @enderror
-            </div>
 
             <div class="mb-4">
                 <label class="form-label" for="email">Email</label>
@@ -63,7 +33,7 @@
                 @enderror
             </div>
 
-            <div class="mb-5">
+            <div class="mb-4">
                 <label class="form-label" for="cell_phone">Cellphone</label>
                 <input
                     id="cell_phone"
@@ -80,13 +50,13 @@
             </div>
 
             <div class="mb-4">
-                <label class="form-label" for="password">Password</label>
+                <label class="form-label" for="password">New Password</label>
                 <input
                     id="password"
                     name="password"
                     class="form-control-game @error('password') is-invalid @enderror"
                     type="password"
-                    placeholder="create a password"
+                    placeholder="new password"
                     required
                 >
                 @error('password')
@@ -106,11 +76,10 @@
                 >
             </div>
 
-            <x-primary-button type="submit" class="button-wrap">I'M READY!</x-primary-button>
+            <x-primary-button type="submit" class="button-wrap">RESET PASSWORD</x-primary-button>
         </form>
 
-        <p class="fine-print text-center">Free to enter. One entry per person.</p>
-        <p class="auth-helper-link auth-helper-link--bottom"><a href="{{ route('login') }}">Already have a password? Log in</a></p>
+        <p class="auth-helper-link auth-helper-link--bottom"><a href="{{ route('login') }}">Back to login</a></p>
         <p class="terms-link-wrap"><a href="#" class="terms-link">Terms &amp; Conditions</a></p>
     </section>
 @endsection

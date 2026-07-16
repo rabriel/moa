@@ -9,11 +9,14 @@ use Illuminate\View\View;
 
 class GameController extends Controller
 {
+    protected const HUNT_PROGRESS_TOTAL = 20;
+    protected const FINAL_PROGRESS_TOTAL = 20;
+
     public function index(Request $request): View
     {
         $player = $this->resolvePlayer($request);
-        $progressTotal = Store::query()->where('is_active', true)->count();
-        $progressFound = $player->visits()->count();
+        $progressTotal = self::HUNT_PROGRESS_TOTAL;
+        $progressFound = min($player->visits()->count(), $progressTotal);
 
         return view('game.index', [
             'player' => $player,
@@ -25,10 +28,10 @@ class GameController extends Controller
     public function complete(Request $request): View
     {
         $player = $this->resolvePlayer($request);
-        $progressTotal = Store::query()->where('is_active', true)->count();
-        $progressFound = min($player->visits()->count(), $progressTotal);
+        $progressTotal = self::FINAL_PROGRESS_TOTAL;
+        $progressFound = self::FINAL_PROGRESS_TOTAL;
 
-        if ($progressFound >= $progressTotal && ! $player->completed_at) {
+        if ($player->visits()->count() >= self::FINAL_PROGRESS_TOTAL && ! $player->completed_at) {
             $player->forceFill([
                 'completed_at' => now(),
             ])->save();
